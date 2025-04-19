@@ -21,9 +21,9 @@ class OpenAILLMClient(BaseLLMClient):
             raise ValueError("The OPENAI_API_KEY environment variable is not set.")
 
         if self.api_key and self.api_base:
-            self.client = OpenAI(api_key=self.api_key, base_url=self.api_base)
+            self.client = OpenAI(api_key=self.api_key, base_url=self.api_base, request_timeout=500)
         else:
-            self.client = OpenAI(api_key=self.api_key)
+            self.client = OpenAI(api_key=self.api_key, request_timeout=500)
 
     def create_completion(self, messages: List[Dict], tools: List = None) -> Dict[str, Any]:
         try:
